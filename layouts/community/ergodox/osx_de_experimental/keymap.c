@@ -27,8 +27,6 @@ enum planck_keycodes {
 
 #define M_TOGGLE_EGOS 1
 
-#define TGH_NUM 2
-
 #define M_DE_OSX_PLUS_CTRLALT 3
 
 #define SM_KISS 4
@@ -99,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 **/
 [BASE]=LAYOUT_ergodox(
 //left half
-    TD(TD_ESC_CAPS), DE_OSX_1, DE_OSX_2, DE_OSX_3, DE_OSX_4, DE_OSX_5, M(TGH_NUM), 
+    TD(TD_ESC_CAPS), DE_OSX_1, DE_OSX_2, DE_OSX_3, DE_OSX_4, DE_OSX_5, TT(NUMB), 
     KC_TAB, DE_OSX_Q, DE_OSX_W, DE_OSX_E, DE_OSX_R, DE_OSX_T, KC_LGUI, 
     KC_LALT, DE_OSX_A, DE_OSX_S, DE_OSX_D, DE_OSX_F, DE_OSX_G, 
     KC_LSFT, CTL_T(DE_OSX_Y), DE_OSX_X, DE_OSX_C, DE_OSX_V, DE_OSX_B, MEH_T(KC_NO), 
@@ -365,21 +363,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             }
 
     break;
-    case TGH_NUM:
-    //Macro: TGH_NUM//-----------------------
-    if (record->event.pressed){
-             start = timer_read();
-             layer_state ^=(1<<NUMB);
-             layer_state &=(1<<NUMB);
-     } else {
-             if (timer_elapsed(start) > 150) {
-                     layer_state^=(1<<NUMB);
-                     layer_state&=(1<<NUMB);
-             }
-     }
-    return MACRO_NONE;
-
-    break;
     case M_DE_OSX_PLUS_CTRLALT:
     //Macro: M_DE_OSX_PLUS_CTRLALT//-----------------------
     if (record->event.pressed) {
@@ -506,11 +489,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 //Tap Dance Definitions
-//qk_tap_dance_action_t tap_dance_actions[] = {
+qk_tap_dance_action_t tap_dance_actions[] = {
   //Tap once for Esc, twice for Caps Lock
-//  [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
+  [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
 // Other declarations would go here, separated by commas, if you have them
-//};
+};
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
