@@ -9,8 +9,19 @@ enum planck_keycodes {
   PLOVER,
   LOWER,
   RAISE,
-  BACKLIT,
   EXT_PLV,
+	M_TOGGLE_EGOS,
+	M_DE_OSX_PLUS_CTRLALT,
+	SM_KISS,
+	SM_FROWN,
+	SM_CRY,
+	SM_SMILE,
+	SM_SMIRK,
+	M_Key_KC_BSLS_MODS,
+	SM_LAUGH,
+  SM_SAD,
+  	SM_LLAP,
+	CIRC_CTRLCMD,
   DYNAMIC_MACRO_RANGE,
 };
 
@@ -24,20 +35,14 @@ enum planck_keycodes {
 #define EGOS 3
 #define DYN 4
 
-enum custom_keycodes {
-	M_TOGGLE_EGOS=SAFE_RANGE,
-	M_DE_OSX_PLUS_CTRLALT,
-	SM_KISS,
-	SM_FROWN,
-	SM_CRY,
-	SM_SMILE,
-	SM_SMIRK,
-	M_Key_KC_BSLS_MODS,
-	SM_LAUGH,
-	SM_HEART,
-  SM_SAD,
-	CIRC_CTRLCMD,
-};
+//enum custom_keycodes {
+ // QWERTY=SAFE_RANGE,
+  //PLOVER,
+  //LOWER,
+  //RAISE,
+  //EXT_PLV,
+  //DYNAMIC_MACRO_RANGE,
+//};
 
 #define _______ KC_TRNS
 
@@ -262,13 +267,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /**
 * Layer: EGOS
 * /--------//--------//--------//--------//--------//--------//--------/             /--------//--------//--------//--------//--------//--------//--------/            
-* |         |  REC1   |   REC2  |         |         |         |         |            |         | Typing  | Typing  |         |         |         |         |           
-* |         |         |         |         |         |         |         |            |         | SM_KISS | SM_HEART|         |         |         |         |           
+* |         |  REC1   |   REC2  |         |         |         |         |            |         | Typing  |         |         |         |         |         |           
+* |         |         |         |         |         |         |         |            |         | SM_KISS |         |         |         |         |         |           
 * /--------//--------//--------//--------//--------//--------//--------/             /--------//--------//--------//--------//--------//--------//--------/            
 * |         |         |         |         |         |         | PLAY1   |            |  PLAY1  | Typing  | Typing  | Typing  |         |         |         |           
 * |         |         |         |         |         |         |         |            |         | SM_FROWN| SM_SAD  | SM_CRY  |         |         |         |           
 * /--------//--------//--------//--------//--------//--------/\--------\             \--------\/--------//--------//--------//--------//--------//--------/            
-* |         |         |         |         |         |         |                                | Typing  | Typing  | Typing  |         |         |         |           
+* |         |         |         |         |         |         |                                | Typing  | Typing  | Typing  | LLAP    |         |         |           
 * |         |         |         |         |         |         |                                | SM_SMIRK| SM_SMILE| SM_LAUGH|         |         |         |           
 * /--------//--------//--------//--------//--------//--------//--------/             /--------//--------//--------//--------//--------//--------//--------/            
 * |         |         |         |         |         |         | PLAY2   |            | PLAY2   |         |         |         |         |         |         |           
@@ -303,9 +308,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                      _______, 
                                        _______, _______, _______, 
     //right half
-    _______, SM_KISS, SM_HEART, _______, _______, _______, _______, 
+    _______, SM_KISS, _______, _______, _______, _______, _______, 
     DYN_MACRO_PLAY1, SM_FROWN, SM_SAD, SM_CRY, _______, _______, _______, 
-           SM_SMIRK, SM_SMILE, SM_LAUGH, _______, _______, _______, 
+           SM_SMIRK, SM_SMILE, SM_LAUGH, SM_LLAP, _______, _______, 
     DYN_MACRO_PLAY2, _______, _______, _______, _______, _______, _______, 
                          _______, _______, _______, _______, _______, 
     _______, _______,
@@ -321,9 +326,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_dynamic_macro(keycode, record)) {
         return false;
     }
+  
    static uint16_t start;
         switch(keycode) {
-		      case M_TOGGLE_EGOS:
+	      case M_TOGGLE_EGOS:
             //Macro: M_TOGGLE_EGOS//-----------------------
               if (record->event.pressed){
                        layer_state ^= (1<<EGOS);
@@ -357,7 +363,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
         break;
 
-  
+    case SM_LLAP:
+	if(record->event.pressed){
+		SEND_STRING("*llap(");
+	}
+	return false;
+	break;
 
     case SM_CRY:
      //Macro: SM_CRY//-----------------------
@@ -409,15 +420,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
         break;
       
-      case SM_HEART:
-     //Macro: SM_HEART//-----------------------
-       if (record->event.pressed) {
-          SEND_STRING("#3");
-  //          return MACRO(TYPE(KC_GRV),TYPE(KC_3),END);
-        }
-        return false;
-        break;
-
      case SM_LAUGH:
           //Macro: SM_LAUGH//-----------------------
         if (record->event.pressed) {
@@ -430,7 +432,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case SM_SAD:
      //Macro: SM_SAD//-----------------------
       if (record->event.pressed) {
-        SEND_STRING(">/=");
+        SEND_STRING(">/*");
   //          return MACRO(DOWN(KC_LSFT),TYPE(KC_DOT),UP(KC_LSFT),TYPE(KC_SLSH),DOWN(KC_LSFT),TYPE(KC_8),UP(KC_LSFT),END);
         }
       return false;
