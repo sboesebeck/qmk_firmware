@@ -202,25 +202,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                                                                                                                      
 * 
 **/
-[MDIA]=LAYOUT_ergodox(
-//left half
-    _______, _______, _______, _______, _______, _______, _______, 
-    _______, _______, KC_BTN1, KC_MS_UP, KC_BTN2, KC_WH_U, _______, 
-    _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_WH_D, 
-    _______, _______, KC_WH_L, KC_BTN3, KC_WH_R, _______, _______, 
-                  _______, _______, _______, _______, _______, 
-                                              _______, _______, 
-                                                     _______, 
-                                       _______, _______, _______, 
-    //right half
-    KC_MPLY, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_MUTE, 
-    KC_VOLU, DE_OSX_SLSH, KC_7, KC_8, KC_9, DE_OSX_ASTR, KC_MNXT, 
-           DE_OSX_EQL, KC_4, KC_5, KC_6, DE_OSX_PLUS, KC_MPRV, 
-    KC_VOLD, DE_OSX_PERC, KC_1, KC_2, KC_3, _______, _______, 
-                         KC_0, KC_DOT, KC_COMM, DE_OSX_EQL, _______, 
-    _______, _______, 
-    _______, 
-    _______, _______, _______),
 /**
 * Layer: EGOS
 * /--------//--------//--------//--------//--------//--------//--------/             /--------//--------//--------//--------//--------//--------//--------/            
@@ -254,25 +235,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                                                                                                                                                                      
 * 
 **/
-[SMLY]=LAYOUT_ergodox(
-//left half
-    _______, _______, _______, _______, _______, _______, _______, 
-    _______, _______, _______, _______, _______, _______, _______, 
-    KC_LSFT, _______, _______, _______, _______, _______, 
-    _______, _______, _______, _______, _______, _______, _______, 
-                  KC_LCTL, _______, _______, _______, _______, 
-                                              KC_F1, KC_F2, 
-                                                     KC_F3, 
-                                       KC_SPC, KC_LCTL, KC_F4, 
-    //right half
-    _______, _______, _______, _______, _______, _______, _______, 
-    _______, _______, _______, _______, _______, _______, _______, 
-           _______, _______, _______, _______, _______, _______, 
-    _______, _______, _______, _______, _______, _______, _______, 
-                         _______, _______, _______, M(M_TOGGLE_EGOS), _______, 
-    _______, _______, 
-    _______, 
-    _______, _______, _______),
 /**
 * Layer: NUMB
 * /----//----//----//----//----//----//----/         /----//----//----//----//----//----//----/        
@@ -544,11 +506,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 //Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+//qk_tap_dance_action_t tap_dance_actions[] = {
   //Tap once for Esc, twice for Caps Lock
-  [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
+//  [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
 // Other declarations would go here, separated by commas, if you have them
-};
+//};
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
