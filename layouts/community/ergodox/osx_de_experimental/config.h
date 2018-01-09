@@ -1,1 +1,3 @@
+#define CONFIG_USER_H
+
 #define PERMISSIVE_HOLD
