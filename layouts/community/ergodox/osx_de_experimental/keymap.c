@@ -201,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   KC_LCTRL, _______, _______, _______, _______, 
                                               KC_F1, KC_F2, 
                                                      KC_F3, 
-                                       KC_SPC, KC_LCTRL, KC_F4, 
+                                       KC_SPC, KC_BSPC, KC_F4, 
     //right half
     _______, _______, _______, _______, _______, _______, _______, 
     _______, _______, _______, _______, _______, _______, _______, 
