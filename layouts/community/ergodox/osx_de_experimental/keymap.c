@@ -34,6 +34,7 @@ enum planck_keycodes {
 #define NUMB 2
 #define EGOS 3
 #define DYN 4
+#define XOY 5
 
 //enum custom_keycodes {
  // QWERTY=SAFE_RANGE,
@@ -259,7 +260,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_MPLY, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_MUTE, 
     KC_MNXT, DE_OSX_SLSH, KC_7, KC_8, KC_9, DE_OSX_ASTR, KC_VOLU, 
            DE_OSX_SLSH, KC_4, KC_5, KC_6, DE_OSX_PLUS, KC_VOLD, 
-    KC_MPRV, DE_OSX_PERC, KC_1, KC_2, KC_3, KC_TRNS, KC_TRNS, 
+    KC_MPRV, DE_OSX_PERC, KC_1, KC_2, KC_3, DE_OSX_MINS, KC_TRNS, 
                          KC_0, KC_DOT, KC_COMM, DE_OSX_EQL, KC_TRNS, 
     KC_TRNS, KC_TRNS, 
     KC_TRNS, 
@@ -316,6 +317,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______,
     _______, 
     _______, _______, _______),
+
+[XOY]=LAYOUT_ergodox(
+//left half
+    TD(TD_ESC_CAPS), DE_OSX_1, DE_OSX_2, DE_OSX_3, DE_OSX_4, DE_OSX_5, TT(NUMB), 
+    KC_TAB, DE_OSX_X, DE_OSX_DOT, DE_OSX_O, DE_OSX_COMM, DE_OSX_Y, KC_LGUI, 
+    KC_LALT, DE_OSX_H, DE_OSX_A, DE_OSX_E, DE_OSX_I, DE_OSX_U, 
+    KC_LSFT, CTL_T(DE_OSX_K), DE_OSX_Q, DE_OSX_AE, DE_OSX_UE, DE_OSX_OE, MEH_T(KC_NO), 
+                  LT(SYMB,DE_OSX_LESS), LCTL(KC_LGUI), LCTL(KC_LALT), LSFT(KC_LCTRL), MO(DYN), 
+                                              KC_HOME, KC_END, 
+                                                     KC_PGUP, 
+                                       KC_BSPC, KC_DEL, KC_PGDN, 
+    //right half
+    KC_LEAD, DE_OSX_6, DE_OSX_7, DE_OSX_8, DE_OSX_9, DE_OSX_0, DE_OSX_MINS, 
+    KC_RGUI, DE_OSX_V, DE_OSX_G, DE_OSX_C, DE_OSX_L, DE_OSX_J, DE_OSX_SS, 
+           DE_OSX_D, DE_OSX_T, DE_OSX_R, DE_OSX_N, DE_OSX_S, ALT_T(DE_OSX_F), 
+    ALL_T(KC_NO), DE_OSX_B, DE_OSX_P, DE_OSX_W, DE_OSX_M, CTL_T(DE_OSX_Z), KC_RSFT, 
+                         M_Key_KC_BSLS_MODS, LGUI(KC_LSFT), LALT(KC_LSFT), DE_OSX_ACUT, LT(SYMB,DE_OSX_PLUS), 
+    KC_LEFT, KC_RIGHT, 
+    KC_UP, 
+    KC_DOWN, KC_ENT, KC_SPC),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -497,6 +518,9 @@ void matrix_scan_user(void) {
         case EGOS:
             ergodox_right_led_2_on();
         break;
+	case XOY:
+	    ergodox_right_led_2_on();
+	    ergodox_right_led_1_on();
         default:
         // none
         break;
@@ -509,6 +533,10 @@ void matrix_scan_user(void) {
         SEQ_ONE_KEY(KC_A) {
             layer_state ^= (1<<EGOS);
             layer_state &= (1<<EGOS);
+        }
+        SEQ_ONE_KEY(KC_N) {
+            layer_state ^= (1<<XOY);
+            layer_state &= (1<<XOY);
         }
         /*
         SEQ_TWO_KEYS(KC_A, KC_S) {
