@@ -20,6 +20,7 @@ enum planck_keycodes {
 	M_Key_KC_BSLS_MODS,
         M_TGL_SMBL_XOY,
         M_TGL_HLD_NUMB,
+        M_TGL_DYN_XOY,
 	SM_LAUGH,
   SM_SAD,
   	SM_LLAP,
@@ -326,7 +327,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB, DE_OSX_X, DE_OSX_DOT, DE_OSX_O, DE_OSX_COMM, DE_OSX_Y, KC_LGUI, 
     KC_LALT, DE_OSX_H, DE_OSX_A, DE_OSX_E, DE_OSX_I, DE_OSX_U, 
     KC_LSFT, CTL_T(DE_OSX_K), DE_OSX_Q, DE_OSX_AE, DE_OSX_UE, DE_OSX_OE, MEH_T(KC_NO), 
-                  M_TGL_SMBL_XOY, LCTL(KC_LGUI), LCTL(KC_LALT), LSFT(KC_LCTRL), MO(DYN), 
+                  M_TGL_SMBL_XOY, LCTL(KC_LGUI), LCTL(KC_LALT), LSFT(KC_LCTRL), M_TGL_DYN_XOY, 
                                               KC_HOME, KC_END, 
                                                      KC_PGUP, 
                                        KC_BSPC, KC_DEL, KC_PGDN, 
@@ -451,6 +452,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }  
         return false;
         break;
+    case M_TGL_DYN_XOY:
+	if (record->event.pressed){
+		start = timer_read();
+		layer_state ^= (1<<DYN);
+                layer_state &= (1<<DYN);
+        } else {
+      		layer_state ^= (1<<XOY);
+                layer_state &= (1<<XOY);
+	}
+	return false;	
+	break;
     case M_TGL_SMBL_XOY:
 	if (record->event.pressed){
 		start = timer_read();
