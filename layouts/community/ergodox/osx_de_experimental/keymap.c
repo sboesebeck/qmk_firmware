@@ -18,6 +18,7 @@ enum planck_keycodes {
 	SM_SMILE,
 	SM_SMIRK,
 	M_Key_KC_BSLS_MODS,
+        M_TGL_SMBL_XOY,
 	SM_LAUGH,
   SM_SAD,
   	SM_LLAP,
@@ -324,7 +325,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB, DE_OSX_X, DE_OSX_DOT, DE_OSX_O, DE_OSX_COMM, DE_OSX_Y, KC_LGUI, 
     KC_LALT, DE_OSX_H, DE_OSX_A, DE_OSX_E, DE_OSX_I, DE_OSX_U, 
     KC_LSFT, CTL_T(DE_OSX_K), DE_OSX_Q, DE_OSX_AE, DE_OSX_UE, DE_OSX_OE, MEH_T(KC_NO), 
-                  LT(SYMB,DE_OSX_LESS), LCTL(KC_LGUI), LCTL(KC_LALT), LSFT(KC_LCTRL), MO(DYN), 
+                  M_TGL_SMBL_XOY, LCTL(KC_LGUI), LCTL(KC_LALT), LSFT(KC_LCTRL), MO(DYN), 
                                               KC_HOME, KC_END, 
                                                      KC_PGUP, 
                                        KC_BSPC, KC_DEL, KC_PGDN, 
@@ -424,7 +425,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
          break;
-
+     
      case CIRC_CTRLCMD:
 //     //Macro: CIRC_CTRLCMD//-----------------------
         if (record->event.pressed) {
@@ -449,6 +450,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }  
         return false;
         break;
+    case M_TGL_SMBL_XOY:
+	if (record->event.pressed){
+		start = timer_read();
+		layer_state ^= (1<<SYMB);
+                layer_state &= (1<<SYMB);
+        } else {
+		if (timer_elapsed(start)<150){
+			SEND_STRING("`");
+		}
+      		layer_state ^= (1<<XOY);
+                layer_state &= (1<<XOY);
+	}
+	return false;	
+	break;
 
     case SM_SAD:
      //Macro: SM_SAD//-----------------------
