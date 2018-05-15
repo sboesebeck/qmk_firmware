@@ -19,6 +19,7 @@ enum planck_keycodes {
 	SM_SMIRK,
 	M_Key_KC_BSLS_MODS,
         M_TGL_SMBL_XOY,
+        M_TGL_HLD_NUMB,
 	SM_LAUGH,
   SM_SAD,
   	SM_LLAP,
@@ -321,7 +322,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [XOY]=LAYOUT_ergodox(
 //left half
-    TD(TD_ESC_CAPS), DE_OSX_1, DE_OSX_2, DE_OSX_3, DE_OSX_4, DE_OSX_5, TT(NUMB), 
+    TD(TD_ESC_CAPS), DE_OSX_1, DE_OSX_2, DE_OSX_3, DE_OSX_4, DE_OSX_5, M_TGL_HLD_NUMB,
     KC_TAB, DE_OSX_X, DE_OSX_DOT, DE_OSX_O, DE_OSX_COMM, DE_OSX_Y, KC_LGUI, 
     KC_LALT, DE_OSX_H, DE_OSX_A, DE_OSX_E, DE_OSX_I, DE_OSX_U, 
     KC_LSFT, CTL_T(DE_OSX_K), DE_OSX_Q, DE_OSX_AE, DE_OSX_UE, DE_OSX_OE, MEH_T(KC_NO), 
@@ -464,6 +465,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	}
 	return false;	
 	break;
+    case M_TGL_HLD_NUMB:
+        if (record->event.pressed){
+		start=timer_read();
+		uint8_t layer = biton32(layer_state);
+		if (layer == NUMB) {
+				layer_state ^= (1<<XOY);
+				layer_state &= (1<<XOY);
+		} else {
+				layer_state ^= (1<<NUMB);
+				layer_state &= (1<<NUMB);
+		}
+  	} else {
+       		if (timer_elapsed(start) > 150){
+			layer_state ^= (1<<XOY);
+			layer_state &= (1<<XOY);
+		}
+	}
+	return false;
+	break;	
 
     case SM_SAD:
      //Macro: SM_SAD//-----------------------
