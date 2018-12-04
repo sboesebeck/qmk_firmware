@@ -1,6 +1,11 @@
 #include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
+#include "version.h"
+
+#include <stdarg.h>
+#include "keymap_extras/keymap_german.h"
+#include "keymap_extras/keymap_german_osx.h"
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
@@ -27,10 +32,8 @@ enum planck_keycodes {
 	CIRC_CTRLCMD,
   DYNAMIC_MACRO_RANGE,
 };
-
 #include "dynamic_macro.h"
-#include "keymap_extras/keymap_german.h"
-#include "keymap_extras/keymap_german_osx.h"
+
 
 #define BASE 0
 #define SYMB 1
@@ -157,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, DE_OSX_BSLS, DE_OSX_LBRC, DE_OSX_RBRC, DE_OSX_LESS, DE_OSX_MORE, DE_OSX_EXLM, 
            DE_OSX_SLSH, DE_OSX_LPRN, DE_OSX_RPRN, DE_OSX_LCBR, DE_OSX_RCBR, DE_OSX_HASH, 
     _______, DE_OSX_PIPE, DE_OSX_TILD, _______, _______, _______, _______, 
-                         DE_OSX_QUOT, DE_OSX_DQOT, KC_NUBS, M_TOGGLE_EGOS, _______, 
+                         DE_OSX_QUOT, DE_OSX_DQOT, KC_NUBS, DE_OSX_SCLN, _______, 
     KC_F13, KC_F12, 
     KC_F14, 
     KC_F15, _______, _______),
@@ -571,7 +574,7 @@ void matrix_scan_user(void) {
         default:
         // none
         break;
-    }
+    };
 
     LEADER_DICTIONARY() {
         leading = false;
@@ -586,6 +589,9 @@ void matrix_scan_user(void) {
             layer_state &= (1<<XOY);
         }
         /*
+	SEQ_ONE_KEY(KC_B) {
+		SEND_STRING("Test");
+	}
         SEQ_TWO_KEYS(KC_A, KC_S) {
           register_code(KC_H);
           unregister_code(KC_H);
