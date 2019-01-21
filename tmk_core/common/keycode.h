@@ -140,6 +140,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_LWIN KC_LGUI
 #define KC_RCTL KC_RCTRL
 #define KC_RSFT KC_RSHIFT
+#define KC_ALGR KC_RALT
 #define KC_RCMD KC_RGUI
 #define KC_RWIN KC_RGUI
 
@@ -172,6 +173,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_MRWD KC_MEDIA_REWIND
 #define KC_BRIU KC_BRIGHTNESS_UP
 #define KC_BRID KC_BRIGHTNESS_DOWN
+
+/* System Specific */
+#define KC_BRMU KC_PAUSE
+#define KC_BRMD KC_SCROLLLOCK
 
 /* Mouse Keys */
 #define KC_MS_U KC_MS_UP
