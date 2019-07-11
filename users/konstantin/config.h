@@ -2,9 +2,6 @@
 
 #define FORCE_NKRO
 
-#define MAGIC_KEY_LAYER0_ALT1 BSLS
-#define MAGIC_KEY_BOOTLOADER  ESC
-
 #define MOUSEKEY_DELAY             50
 #define MOUSEKEY_INTERVAL          15
 #define MOUSEKEY_MAX_SPEED         4
@@ -14,11 +11,13 @@
 
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_MACRO
+#define NO_ACTION_ONESHOT
 
 #define PERMISSIVE_HOLD
-#define TAPPING_TERM    200
-#define TAPPING_TOGGLE  2
+#define TAPPING_TERM        200
+#define TAPPING_TOGGLE      2
+#define TAP_HOLD_CAPS_DELAY 50
 
 #define UNICODE_CYCLE_PERSIST  false
 #define UNICODE_SELECTED_MODES UC_WINC, UC_WIN, UC_LNX
-#define UNICODE_WINC_KEY       KC_RGUI
+#define UNICODE_KEY_WINC       KC_RGUI
