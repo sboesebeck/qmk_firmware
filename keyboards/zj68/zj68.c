@@ -1,4 +1,4 @@
-/* Copyright 2018 amnesia0287
+/* Copyright 2019 Collin Diekvoss <cdiekvoss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,7 +13,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "zj68.h"
 
-#pragma once
+void matrix_init_kb(void) {
+    matrix_init_user();
+}
 
-// place overrides here
+void matrix_scan_kb(void) {
+    matrix_scan_user();
+}
