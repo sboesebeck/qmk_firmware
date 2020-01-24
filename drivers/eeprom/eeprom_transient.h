@@ -1,4 +1,4 @@
-/* Copyright 2019 MechMerlin
+/* Copyright 2019 Nick Brassel (tzarc)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,20 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "meteor.h"
+#pragma once
 
-void keyboard_pre_init_kb(void) {
-    led_init_ports();
-    keyboard_pre_init_user();
-}
-
-void led_init_ports(void) {
-    setPinOutput(D1);
-}
-
-bool led_update_kb(led_t led_state) {
-    if (led_update_user(led_state)) {
-        writePin(D1, led_state.caps_lock);
-    }
-    return true;
-}
+/*
+    The size of the transient EEPROM buffer size.
+*/
+#ifndef TRANSIENT_EEPROM_SIZE
+#    include "eeconfig.h"
+#    define TRANSIENT_EEPROM_SIZE (((EECONFIG_SIZE + 3) / 4) * 4)  // based off eeconfig's current usage, aligned to 4-byte sizes, to deal with LTO
+#endif
