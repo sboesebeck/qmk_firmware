@@ -1,4 +1,4 @@
-/* Copyright 2019 Kumao Kobo <kumaokobo@gmail.com>
+/* Copyright 2020 yushakobo
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,19 +14,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#ifdef KEYBOARD_kudox_rev1
-    #include "rev1.h"
-#endif
-#ifdef KEYBOARD_kudox_rev2
-    #include "rev2.h"
-#endif
-#ifdef KEYBOARD_kudox_rev3
-    #include "rev3.h"
-#endif
-#ifdef KEYBOARD_kudox_columner
-    #include "columner.h"
-#endif
-
-#include "quantum.h"
+#include "quick7.h"
