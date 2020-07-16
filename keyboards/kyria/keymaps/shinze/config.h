@@ -1,4 +1,4 @@
-/* Copyright %YEAR% %YOUR_NAME%
+/* Copyright 2019 Thomas Baart <thomas@splitkb.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,20 +16,17 @@
 
 #pragma once
 
-#include "quantum.h"
+#ifdef OLED_DRIVER_ENABLE
+  #define OLED_DISPLAY_128X64
+#endif
 
-/* This is a shortcut to help you visually see your layout.
- *
- * The first section contains all of the arguments representing the physical
- * layout of the board and position of the keys.
- *
- * The second converts the arguments into a two-dimensional array which
- * represents the switch matrix.
- */
-#define LAYOUT( \
-    k00, k01, k02, \
-      k10,  k12    \
-) { \
-    { k00, k01,   k02 }, \
-    { k10, KC_NO, k12 }  \
-}
+#ifdef RGBLIGHT_ENABLE
+  #define RGBLIGHT_ANIMATIONS
+  #define RGBLIGHT_HUE_STEP 8
+  #define RGBLIGHT_SAT_STEP 8
+  #define RGBLIGHT_VAL_STEP 8
+#endif
+
+// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
+// #define SPLIT_USB_DETECT
+// #define NO_USB_STARTUP_CHECK

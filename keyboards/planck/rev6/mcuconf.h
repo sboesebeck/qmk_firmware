@@ -1,8 +1,8 @@
-/* Copyright %YEAR% %YOUR_NAME%
+/* Copyright 2020 QMK Contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
+ * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -14,22 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include_next "mcuconf.h"
 
-#include "quantum.h"
+// The SysTick timer from the normal quantum/stm32 uses TIM2 -- the WS2812 pin used
+// on the Planck requires the use of TIM2 to run PWM -- rework which timers are
+// allocated for PWM usage.
+#undef STM32_PWM_USE_TIM2
+#undef STM32_PWM_USE_TIM3
+#define STM32_PWM_USE_TIM2 TRUE
+#define STM32_PWM_USE_TIM3 FALSE
 
-/* This is a shortcut to help you visually see your layout.
- *
- * The first section contains all of the arguments representing the physical
- * layout of the board and position of the keys.
- *
- * The second converts the arguments into a two-dimensional array which
- * represents the switch matrix.
- */
-#define LAYOUT( \
-    k00, k01, k02, \
-      k10,  k12    \
-) { \
-    { k00, k01,   k02 }, \
-    { k10, KC_NO, k12 }  \
-}
+// As mentioned above, we need to reallocate the SysTick timer used from
+// TIM2 to TIM3.
+#undef STM32_ST_USE_TIMER
+#define STM32_ST_USE_TIMER 3
