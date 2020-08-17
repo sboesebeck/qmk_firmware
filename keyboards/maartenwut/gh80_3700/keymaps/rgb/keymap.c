@@ -1,4 +1,4 @@
-/* Copyright 2020 Gone Hacking Studio
+/* Copyright 2020 Maarten Dekkers <maartenwut@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,24 +13,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include QMK_KEYBOARD_H
 
-#include "rar.h"
-
-void keyboard_pre_init_kb(void) {
-    // Set our LED pins as output.
-    setPinOutput(B1);
-    setPinOutput(B3);
-
-    keyboard_pre_init_user();
-}
-
-bool led_update_kb(led_t led_state) {
-    bool res = led_update_user(led_state);
-
-    if (res) {
-        writePin(B1, led_state.caps_lock);
-        writePin(B3, led_state.scroll_lock);
-    }
-
-    return res;
-}
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+[0] = LAYOUT_ortho_6x4(
+  KC_ESC,   KC_TAB,   KC_EQL,   KC_BSPC,
+  KC_NLCK,  KC_PSLS,  KC_PAST,  KC_PMNS,
+  KC_P7,    KC_P8,    KC_P9,    KC_PPLS,
+  KC_P4,    KC_P5,    KC_P6,    KC_PPLS,
+  KC_P1,    KC_P2,    KC_P3,    KC_PENT,
+  KC_P0,    KC_P0,    KC_PDOT,  KC_PENT),
+};
