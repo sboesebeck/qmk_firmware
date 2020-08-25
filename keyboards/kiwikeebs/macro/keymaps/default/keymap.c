@@ -1,4 +1,4 @@
-/* Copyright 2020 hineybush
+/* Copyright 2020 KiwiKeebs
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,22 +13,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include QMK_KEYBOARD_H
 
-#include "h10.h"
+// Defines names for use in layer keycodes and the keymap
+enum layer_names {
+    _BASE,
+    _FN
+};
 
-// Optional override functions below.
-// You can leave any or all of these undefined.
-// These are only required if you want to perform custom actions.
-
-void matrix_init_kb(void) {
-    // put your keyboard start-up code here
-    // runs once when the firmware starts up
-   	setPinOutput(F7);
-}
-
-bool led_update_kb(led_t led_state) {
-    if(led_update_user(led_state)) {
-        writePin(F7, !led_state.num_lock);
-    }
-    return true;
-}
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    /* Base */
+    [_BASE] = LAYOUT(
+        KC_DEL,  KC_HOME, LT(_FN,KC_END),
+        KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE
+    ),
+    [_FN] = LAYOUT(
+        KC_1,    KC_UP,   _______,
+        KC_LEFT, KC_DOWN, KC_RGHT, _______
+    )
+};
