@@ -1,4 +1,4 @@
-/* Copyright 2019 HnahKB
+/* Copyright 2020 Guillaume Gérard
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,7 +13,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #pragma once
 
-// place overrides here
+#define TAP_CODE_DELAY 5
+
+#define RGBLIGHT_ANIMATIONS
+
+#ifdef TAP_DANCE_ENABLE
+#    define TAPPING_TERM 175
+#    define PERMISSIVE_HOLD
+#endif
+
+#ifdef AUTO_SHIFT_ENABLE
+#    define AUTO_SHIFT_TIMEOUT 135
+#    define NO_AUTO_SHIFT_SPECIAL
+#    define NO_AUTO_SHIFT_NUMERIC
+#endif
