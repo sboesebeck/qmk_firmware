@@ -1,5 +1,5 @@
 /*
-Copyright 2015 Jun Wako <wakojun@gmail.com>
+Copyright 2020 Álvaro "Gondolindrim" Volpato  <gondolindrim@acheronproject.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,12 +15,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#pragma once
+#include "technika.h"
 
-#include "config_common.h"
+void keyboard_pre_init_kb(void) {
+    setPinOutput(A15);
+    setPinOutput(B3);
+    setPinOutput(B4);
 
-#define FORCE_NKRO
-
-#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_COLOR
-#define RGB_MATRIX_STARTUP_VAL 100
-#define HSV_BACKLIGHT_COLOR HSV_BLUE
+    keyboard_pre_init_user();
+}
